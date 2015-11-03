@@ -34,7 +34,7 @@ class Funcionario(models.Model):
 class Servico(models.Model):
     nome = models.CharField(max_length=200, null=False)
     descricao = models.TextField()
-    valor = models.DecimalField(max_digits=10, decimal_places=2)
+    valor = models.IntegerField(max_length=10)
 
     def __str__(self):
         return self.nome
@@ -45,7 +45,6 @@ class Historico(models.Model):
     servicos = models.ManyToManyField(Servico)
     data_chamado = models.DateTimeField(default=timezone.now, null=False)
     data_realizacao = models.DateTimeField(blank=True, null=True)
-    valor_total = models.DecimalField(max_digits=10, decimal_places=2)
     observacao = models.TextField()
 
     def salvar(self):
@@ -73,7 +72,7 @@ class Historico(models.Model):
         return ident
     ident.short_description = 'ID'
 
-    def valor(self):
+    def valor2(self):
         soma = float(0)
         lib = cdll.LoadLibrary("c:\lib_soma.so")
         valores = self.servicos.values('valor')
@@ -85,7 +84,7 @@ class Historico(models.Model):
         return soma
 
 
-    def valor2(self):
+    def valor(self):
         soma = float(0)
         lib = cdll.LoadLibrary("c:\libteste.so")
         valores = self.servicos.values('valor')
