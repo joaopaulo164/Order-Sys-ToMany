@@ -16,6 +16,11 @@ class Cliente(models.Model):
     def __str__(self):
         return self.nome
 
+    def ident(self):
+        ident = str(self.id)
+        return ident
+    ident.short_description = 'ID'
+
 class Funcionario(models.Model):
     nome = models.CharField(max_length=200, null=False)
     sobrenome = models.CharField(max_length=200, null=False)
@@ -31,13 +36,23 @@ class Funcionario(models.Model):
     def __str__(self):
         return self.nome
 
+    def ident(self):
+        ident = str(self.id)
+        return ident
+    ident.short_description = 'ID'
+
 class Servico(models.Model):
     nome = models.CharField(max_length=200, null=False)
     descricao = models.TextField()
-    valor = models.IntegerField(max_length=10)
+    valor = models.IntegerField(null=False)
 
     def __str__(self):
         return self.nome
+
+    def ident(self):
+        ident = str(self.id)
+        return ident
+    ident.short_description = 'ID'
 
 class Historico(models.Model):
     cliente = models.ForeignKey(Cliente)
